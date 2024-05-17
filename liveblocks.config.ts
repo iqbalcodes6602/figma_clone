@@ -1,19 +1,19 @@
-import { createClient } from "@liveblocks/client";
+import { createClient, LiveMap } from "@liveblocks/client";
 import { createRoomContext, createLiveblocksContext } from "@liveblocks/react";
-  
+
 const client = createClient({
   publicApiKey: process.env.NEXT_PUBLIC_LIVEBLOCKS_PUBLIC_KEY!,
   async resolveUsers({ userIds }) {
     // Used only for Comments and Notifications. Return a list of user information
     // retrieved from `userIds`. This info is used in comments, mentions etc.
-    
+
     // const usersData = await __fetchUsersFromDB__(userIds);
     // 
     // return usersData.map((userData) => ({
     //   name: userData.name,
     //   avatar: userData.avatar.src,
     // }));
-    
+
     return [];
   },
   async resolveMentionSuggestions({ text }) {
@@ -33,14 +33,14 @@ const client = createClient({
   async resolveRoomsInfo({ roomIds }) {
     // Used only for Comments and Notifications. Return a list of room information
     // retrieved from `roomIds`.
-    
+
     // const roomsData = await __fetchRoomsFromDB__(roomIds);
     // 
     // return roomsData.map((roomData) => ({
     //   name: roomData.name,
     //   url: roomData.url,
     // }));
-    
+
     return [];
   },
 });
@@ -60,6 +60,7 @@ type Presence = {
 type Storage = {
   // author: LiveObject<{ firstName: string, lastName: string }>,
   // ...
+  canvasObjects: LiveMap<string, any>,
 };
 
 // Optionally, UserMeta represents static/readonly metadata on each user, as
@@ -126,7 +127,7 @@ export const {
     useMarkThreadAsRead,
     useRoomNotificationSettings,
     useUpdateRoomNotificationSettings,
-  
+
     // These hooks can be exported from either context
     // useUser,
     // useRoomInfo
@@ -141,7 +142,7 @@ export const {
     useMarkAllInboxNotificationsAsRead,
     useInboxNotifications,
     useUnreadInboxNotificationsCount,
-  
+
     // These hooks can be exported from either context
     useUser,
     useRoomInfo,
